@@ -1,0 +1,272 @@
+body{
+    margin:0 ;
+    font-family: "Inter", sans-serif;
+}
+#header{
+    background-color:rgb(249 101 0);
+    width: 100%;
+    top: 0;
+    position: fixed;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    transition: 0.3s ease, background-color 0.3s ease;
+    z-index: 10;
+}
+
+.nav img{
+    filter: grayscale(100%) brightness(500%);
+    max-height: fit-content;
+    
+}
+.container{
+    width: 1280px;
+    margin: auto;
+}
+.nav{
+    width: 95%;
+    margin: auto;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.menu{
+	display: flex;
+    justify-content: space-between;
+	align-items: center;
+    gap: 5px;		
+}
+.menu li{
+    list-style: none;
+    
+}
+
+.nav-link {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link:hover{
+    color: black;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: white;
+}
+
+
+.tombol{
+	display: none;
+	color: white;
+	font-size: 14pt;	
+   		
+}
+
+.tombol::before {
+  content: '\2630';
+}
+
+.tombol.aktif::before {
+  content: '\2715'; 
+}
+
+
+.tombol:hover{
+	cursor: pointer;
+}
+
+
+.banner{
+    margin-top: 70px;
+    overflow: hidden;
+    height: 100vh;
+}
+.banner-img{
+    background-image: url('banner1.jpg');
+    background-position: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    will-change: transform;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    filter:brightness(70%);
+  
+}
+.banner-text{
+    position:relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    top: 40%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.banner-text h1 {
+    font-size: 48px;
+    margin: 0;
+    font-weight: normal;
+ 
+}
+
+.banner-text p {
+    
+    font-size: 20px;
+    margin-top: 1px;
+}
+
+
+
+.list-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4/3;
+}
+
+.card .title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.card-content {
+    padding: 8px; 
+}
+
+.publish-date {
+    font-size: 12px;
+    color: #999; 
+    margin: 0 0 8px 0; 
+}
+
+.card .title {
+    margin-top: 0;
+}
+
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: black;
+  color: white;
+  border-color: black;
+}
+
+
+
+@media screen and (max-width:1024px) {
+
+    .container{
+    width: 100%;}
+}
+@media screen and (max-width:768px) {
+    .container{
+        width: 100%;
+    }
+
+    .menu {
+		display: none;
+	}
+
+	.menu.aktif{
+		display:inline-block;
+		position: absolute;
+		top: 54px;
+		background-color:rgb(249 101 0);
+		padding: 10px 20px;
+		right: 0;
+		left: 0;
+    
+	}
+
+ 
+	.menu.aktif li a{
+		padding: 10px 20px;
+		display: inline-block !important;
+        
+       
+	}
+
+    .menu.aktif li{
+        display:grid;
+    }
+
+    .menu.aktif li a:hover{
+        color: black;
+    } 
+    
+    .tombol{
+        display: block;
+    }
+
+    
+
+}

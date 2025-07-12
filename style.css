@@ -129,7 +129,13 @@ body{
     margin-top: 1px;
 }
 
+.dua{
+  width: 1200px;
+}
 
+#showing-status{
+  padding-left: 10px;
+}
 
 .list-controls {
   display: flex;
@@ -160,12 +166,19 @@ select {
 }
 
 .card {
-  border: 1px solid #ddd;
   background: #fff;
   border-radius: 10px;
   padding: 12px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+ align-self: center;
+ align-content: center;
+ justify-items: center;
+ justify-self: center;
 }
 
 .card img {
@@ -176,10 +189,8 @@ select {
   object-fit: cover;
   border-radius: 5px;
   background-color: #f0f0f0;
-  /* Fallback untuk gambar yang tidak bisa dimuat */
 }
 
-/* Tambahkan style untuk gambar yang gagal dimuat */
 .card img[src*="data:image"] {
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
@@ -189,9 +200,9 @@ select {
 }
 
 .card .title {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: bold;
-  margin-top: 10px;
+  padding-top: 0px;
   line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -205,9 +216,12 @@ select {
 }
 
 .publish-date {
-    font-size: 12px;
+  padding-top: 18px;
+    margin-top: 10px;
+    font-size: 14px;
     color: #999; 
     margin: 0 0 8px 0; 
+    padding-bottom: 0;
 }
 
 .card .title {
@@ -219,20 +233,22 @@ select {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .pagination button {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: none;
   background: white;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .pagination button.active {
-  background: black;
+  background: rgb(249 101 0);
   color: white;
-  border-color: black;
+
 }
 
 

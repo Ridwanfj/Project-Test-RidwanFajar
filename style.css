@@ -168,38 +168,37 @@ select {
 .card {
   background: #fff;
   border-radius: 10px;
-  padding: 12px;
+  padding-bottom: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   height: 350px;
-  display: flex;
-  flex-direction: column;
- align-items: center;
- align-self: center;
- align-content: center;
- justify-items: center;
- justify-self: center;
-}
+  cursor: pointer;
 
-.card img {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 5px;
-  background-color: #f0f0f0;
 }
-
+.card:hover{
+  color: rgb(249 101 0);
+}
+.card:hover img{
+  transform: scale(1.4);
+}
+.img-container{
+  overflow: hidden;
+  border: 0px solid white;
+  background-color: white;
+  border-radius: 10px;
+}
 .card img[src*="data:image"] {
   background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
-  display: flex;
   align-items: center;
+  display: block;
   justify-content: center;
+  transition: transform 0.3s ease
+
 }
 
 .card .title {
+  
+  display: inline-block;
   font-size: 19px;
   font-weight: bold;
   padding-top: 0px;
@@ -209,23 +208,26 @@ select {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  
 }
 
 .card-content {
-    padding: 8px; 
+  padding-right: 15px;
+  padding-left: 15px;
+
 }
 
 .publish-date {
-  padding-top: 18px;
-    margin-top: 10px;
+    padding-top: 10px;
     font-size: 14px;
     color: #999; 
-    margin: 0 0 8px 0; 
+    margin: 5 0 8px 0; 
     padding-bottom: 0;
 }
 
 .card .title {
     margin-top: 0;
+    padding-top: 0;
 }
 
 .pagination {
@@ -245,10 +247,43 @@ select {
   cursor: pointer;
 }
 
+.pagination button:hover{
+  background-color: #f0f0f0;
+}
+
 .pagination button.active {
   background: rgb(249 101 0);
   color: white;
 
+}
+.pagination .nav-btn {
+  padding: 8px 12px;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.pagination .nav-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination .nav-btn.disabled {
+
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination .nav-btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 

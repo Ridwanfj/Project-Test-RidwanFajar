@@ -55,7 +55,6 @@ let perPage = 10;
 sortSelect.value = sortBy;
 perPageSelect.value = perPage;
 
-// Daftar placeholder images sebagai fallback
 const placeholderImages = [
   'https://picsum.photos/400/300?random=1',
   'https://picsum.photos/400/300?random=2',
@@ -69,12 +68,10 @@ const placeholderImages = [
   'https://picsum.photos/400/300?random=10'
 ];
 
-// Fungsi untuk mendapatkan placeholder berdasarkan index
 function getPlaceholderImage(index) {
   return placeholderImages[index % placeholderImages.length];
 }
 
-// Fungsi untuk mengonversi gambar ke data URL melalui canvas (mengatasi CORS)
 function convertImageToDataUrl(imageUrl) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -103,22 +100,12 @@ function convertImageToDataUrl(imageUrl) {
   });
 }
 
-// Fungsi untuk mencoba berbagai strategi loading gambar
 async function loadImageWithFallback(originalUrl, fallbackIndex = 0) {
   const strategies = [
-    // Strategi 1: Gunakan proxy lokal
     () => `/api/proxy-image?url=${encodeURIComponent(originalUrl)}`,
-    
-    // Strategi 2: Gunakan CORS proxy gratis
     () => `https://cors-anywhere.herokuapp.com/${originalUrl}`,
-    
-    // Strategi 3: Gunakan proxy alternatif
     () => `https://api.allorigins.win/get?url=${encodeURIComponent(originalUrl)}`,
-    
-    // Strategi 4: Coba akses langsung dengan cache busting
     () => `${originalUrl}?t=${Date.now()}`,
-    
-    // Strategi 5: Gunakan placeholder dengan warna berbeda
     () => getPlaceholderImage(fallbackIndex)
   ];
   
@@ -133,7 +120,7 @@ async function loadImageWithFallback(originalUrl, fallbackIndex = 0) {
           img.onload = null;
           img.onerror = null;
           resolve(false);
-        }, 5000); // 5 detik timeout
+        }, 5000);
         
         img.onload = function() {
           clearTimeout(timeout);
@@ -157,11 +144,9 @@ async function loadImageWithFallback(originalUrl, fallbackIndex = 0) {
     }
   }
   
-  // Jika semua strategi gagal, gunakan placeholder
   return getPlaceholderImage(fallbackIndex);
 }
 
-// Fungsi untuk mengekstrak URL gambar dari response API
 function extractImageUrl(imageData) {
   if (!imageData) return null;
   
@@ -181,7 +166,6 @@ function extractImageUrl(imageData) {
   return null;
 }
 
-// Fungsi untuk memproses URL gambar
 function processImageUrl(url) {
   if (!url) return null;
   
@@ -234,7 +218,6 @@ function fetchPosts() {
     });
 }
 
-// Render posts dengan loading gambar yang robust
 async function renderPosts(posts) {
     if (!posts || posts.length === 0) {
         postList.innerHTML = "<p style='text-align: center; padding: 20px; color: #666;'>Tidak ada post untuk ditampilkan.</p>";
@@ -300,11 +283,14 @@ async function renderPosts(posts) {
 
                 return `
                     <div class="card" style="animation: fadeIn 0.5s ease-in;">
-                        <img src="${finalImageUrl}" 
+                        <div class ="img-container">
+                          <img src="${finalImageUrl}" 
                              loading="lazy" 
                              alt="${post.title || 'Post image'}"
-                             style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;"
+                             style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;"
                              onerror="this.src='${getPlaceholderImage(globalIndex)}'; console.log('Final fallback used for:', '${post.title}');">
+                          </div>
+
                         <div class="card-content">
                             <p class="publish-date">${publishDate}</p>
                             <div class="title">${post.title || 'Untitled'}</div>
@@ -343,12 +329,52 @@ function updateShowingText(meta) {
   const end = Math.min(meta.total, meta.current_page * meta.per_page);
   showingStatus.textContent = `Showing ${start} - ${end} of ${meta.total}`;
 }
-
 function renderPagination(meta) {
   const totalPages = meta.last_page;
   pagination.innerHTML = '';
   
-  for (let i = 1; i <= totalPages; i++) {
+  // First page button
+  const firstBtn = document.createElement('a');
+  firstBtn.href = '#';
+  firstBtn.title = 'first page';
+  firstBtn.innerHTML = '<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M17.59 18L19 16.59 14.42 12 19 7.41 17.59 6l-6 6zM11 18l1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"/></svg>';
+  firstBtn.className = 'nav-btn';
+  if (currentPage === 1) {
+    firstBtn.classList.add('disabled');
+  } else {
+    firstBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentPage = 1;
+      fetchPosts();
+    });
+  }
+  pagination.appendChild(firstBtn);
+  
+  const prevBtn = document.createElement('a');
+  prevBtn.href = '#';
+  prevBtn.title = 'previous page';
+  prevBtn.innerHTML = '<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>';
+  prevBtn.className = 'nav-btn';
+  if (currentPage === 1) {
+    prevBtn.classList.add('disabled');
+  } else {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentPage--;
+      fetchPosts();
+    });
+  }
+  pagination.appendChild(prevBtn);
+  
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, startPage + 4);
+  
+
+  if (endPage - startPage < 4) {
+    startPage = Math.max(1, endPage - 4);
+  }
+  
+  for (let i = startPage; i <= endPage; i++) {
     const btn = document.createElement('button');
     btn.textContent = i;
     if (i === currentPage) btn.classList.add('active');
@@ -358,6 +384,39 @@ function renderPagination(meta) {
     });
     pagination.appendChild(btn);
   }
+  
+  const nextBtn = document.createElement('a');
+  nextBtn.href = '#';
+  nextBtn.title = 'next page';
+  nextBtn.innerHTML = '<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>';
+  nextBtn.className = 'nav-btn';
+  if (currentPage === totalPages) {
+    nextBtn.classList.add('disabled');
+  } else {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentPage++;
+      fetchPosts();
+    });
+  }
+  pagination.appendChild(nextBtn);
+  
+ 
+  const lastBtn = document.createElement('a');
+  lastBtn.href = '#';
+  lastBtn.title = 'last page';
+  lastBtn.innerHTML = '<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M6.41 6L5 7.41 9.58 12 5 16.59 6.41 18l6-6zM13 6l-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"/></svg>';
+  lastBtn.className = 'nav-btn';
+  if (currentPage === totalPages) {
+    lastBtn.classList.add('disabled');
+  } else {
+    lastBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentPage = totalPages;
+      fetchPosts();
+    });
+  }
+  pagination.appendChild(lastBtn);
 }
 
 sortSelect.addEventListener('change', () => {

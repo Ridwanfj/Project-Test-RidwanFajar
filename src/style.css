@@ -333,6 +333,29 @@ select {
         display: block;
     }
 
+    .post-grid{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      align-items: center;
+      justify-items: center;
+      column-gap: 10px;
     
+    }
+
+    .card{
+      width: 90%;
+      height: auto;
+    }
+    
+    .list-controls{
+      display: flex ;
+   
+    }
+
+    #showing-status, .filters{
+      display: inline-block;
+      font-size: 12px;
+
+    }
 
 }

@@ -335,13 +335,13 @@ select {
 
     .post-grid{
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2,1fr);
       align-items: center;
       justify-items: center;
     }
 
     .card{
-      width: 60%;
+      width: auto;
       min-height: 80%;
     }
     

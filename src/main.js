@@ -18,6 +18,10 @@ window.addEventListener("scroll", () => {
 });
 
 const currentPage2 = window.location.pathname.split("/").pop();
+if (currentPage2 === "") {
+  currentPage2 = "index.html";
+}
+
 document.querySelectorAll('.nav-link').forEach(link => {
   if (link.getAttribute("href") === currentPage2) {
     link.classList.add("active");

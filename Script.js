@@ -32,6 +32,7 @@ tombol.addEventListener('click', () => {
     tombol.classList.toggle('aktif'); 
 });
 
+
 window.addEventListener('scroll', () => {
   const bannerImage = document.querySelector('.banner-img');
   const scrollPosition = window.pageYOffset;

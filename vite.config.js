@@ -6,7 +6,6 @@ export default defineConfig({
       '/api': {
         target: 'https://suitmedia-backend.suitdev.com',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
         configure: (proxy, options) => {
           proxy.on('error', (err, req, res) => {
             console.log('proxy error', err);

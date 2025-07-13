@@ -186,7 +186,7 @@ function processImageUrl(url) {
 }
 
 function fetchPosts() {
-  const API_URL = `/api/api/ideas?page[number]=${currentPage}&page[size]=${perPage}&append[]=small_image&append[]=medium_image&sort=${sortBy}`;
+  const API_URL = `/api/ideas?page[number]=${currentPage}&page[size]=${perPage}&append[]=small_image&append[]=medium_image&sort=${sortBy}`;
   
   fetch(API_URL, {
     method: 'GET',

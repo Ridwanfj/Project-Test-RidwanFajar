@@ -1,96 +1,338 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+    margin:0 ;
+    font-family: "Inter", sans-serif;
+}
+#header{
+    background-color:rgb(249 101 0);
+    width: 100%;
+    top: 0;
+    position: fixed;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    transition: 0.3s ease, background-color 0.3s ease;
+    z-index: 10;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.nav img{
+    filter: grayscale(100%) brightness(500%);
+    max-height: fit-content;
+    
 }
-a:hover {
-  color: #535bf2;
+.container{
+    width: 1280px;
+    margin: auto;
+}
+.nav{
+    width: 95%;
+    margin: auto;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.menu{
+	display: flex;
+    justify-content: space-between;
+	align-items: center;
+    gap: 5px;		
+}
+.menu li{
+    list-style: none;
+    
 }
 
-body {
-  margin: 0;
+.nav-link {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link:hover{
+    color: black;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: white;
+}
+
+
+.tombol{
+	display: none;
+	color: white;
+	font-size: 14pt;	
+   		
+}
+
+.tombol::before {
+  content: '\2630';
+}
+
+.tombol.aktif::before {
+  content: '\2715'; 
+}
+
+
+.tombol:hover{
+	cursor: pointer;
+}
+
+
+.banner{
+    margin-top: 70px;
+    overflow: hidden;
+    height: 100vh;
+}
+.banner-img{
+    background-image: url('banner1.jpg');
+    background-position: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    will-change: transform;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    filter:brightness(70%);
+  
+}
+.banner-text{
+    position:relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    top: 40%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.banner-text h1 {
+    font-size: 48px;
+    margin: 0;
+    font-weight: normal;
+ 
+}
+
+.banner-text p {
+    
+    font-size: 20px;
+    margin-top: 1px;
+}
+
+.dua{
+  width: 1200px;
+}
+
+#showing-status{
+  padding-left: 10px;
+}
+
+.list-controls {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
 }
 
 .card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background: #fff;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 350px;
   cursor: pointer;
-  transition: border-color 0.25s;
+
 }
-button:hover {
-  border-color: #646cff;
+.card:hover{
+  color: rgb(249 101 0);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.card:hover img{
+  transform: scale(1.4);
+}
+.img-container{
+  overflow: hidden;
+  border: 0px solid white;
+  background-color: white;
+  border-radius: 10px;
+}
+.card img[src*="data:image"] {
+  background-color: #f8f9fa;
+  align-items: center;
+  display: block;
+  justify-content: center;
+  transition: transform 0.3s ease
+
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.card .title {
+  
+  display: inline-block;
+  font-size: 19px;
+  font-weight: bold;
+  padding-top: 0px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  
+}
+
+.card-content {
+  padding-right: 15px;
+  padding-left: 15px;
+
+}
+
+.publish-date {
+    padding-top: 10px;
+    font-size: 14px;
+    color: #999; 
+    margin: 5 0 8px 0; 
+    padding-bottom: 0;
+}
+
+.card .title {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:hover{
+  background-color: #f0f0f0;
+}
+
+.pagination button.active {
+  background: rgb(249 101 0);
+  color: white;
+
+}
+.pagination .nav-btn {
+  padding: 8px 12px;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.pagination .nav-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination .nav-btn.disabled {
+
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination .nav-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+@media screen and (max-width:1024px) {
+
+    .container{
+    width: 100%;}
+}
+@media screen and (max-width:768px) {
+    .container{
+        width: 100%;
+    }
+
+    .menu {
+		display: none;
+	}
+
+	.menu.aktif{
+		display:inline-block;
+		position: absolute;
+		top: 54px;
+		background-color:rgb(249 101 0);
+		padding: 10px 20px;
+		right: 0;
+		left: 0;
+    
+	}
+
+ 
+	.menu.aktif li a{
+		padding: 10px 20px;
+		display: inline-block !important;
+        
+       
+	}
+
+    .menu.aktif li{
+        display:grid;
+    }
+
+    .menu.aktif li a:hover{
+        color: black;
+    } 
+    
+    .tombol{
+        display: block;
+    }
+
+    
+
 }

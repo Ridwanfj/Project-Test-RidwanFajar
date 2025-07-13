@@ -335,16 +335,14 @@ select {
 
     .post-grid{
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: 1fr;
       align-items: center;
       justify-items: center;
-      column-gap: 10px;
-    
     }
 
     .card{
-      width: 90%;
-      height: auto;
+      width: 60%;
+      min-height: 80%;
     }
     
     .list-controls{
